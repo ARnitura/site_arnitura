@@ -64,13 +64,12 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () {},
             ),
           ),
-
         ],
         leading: Container(
           margin: const EdgeInsets.only(left: 100),
           child: TextButton(
             style: ButtonStyle(padding: MaterialStateProperty.all(EdgeInsets.zero)),
-            onPressed: () {  },
+            onPressed: () {},
             child: Image.asset(
               'assets/appbar/logo_app_bar.png',
             ),
@@ -83,7 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Container(
-              margin: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.3),
+              margin: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.25),
               decoration: BoxDecoration(border: Border.all(color: const Color(0xFF4094D0)), borderRadius: BorderRadius.circular(17)),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -93,35 +92,28 @@ class _MyHomePageState extends State<MyHomePage> {
                     padding: const EdgeInsets.fromLTRB(0, 30, 0, 30),
                     child: Text('Авторизация', style: theme.textTheme.titleLarge),
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-                        child: Text('ИНН или адрес эл. почты', style: theme.textTheme.titleSmall),
-                      ),
-                      SizedBox(
-                        width: 453,
-                        height: 35,
-                        child: TextFormField(
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.4 / 2),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(50, 0, 50, 0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                          child: Text('ИНН или адрес эл. почты', style: theme.textTheme.titleSmall),
+                        ),
+                        SizedBox(
+                          height: 35,
+                          child: TextFormField(
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                            ),
+                          ),
+                        ),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(0, 20, 0, 10),
                           child: Text('Пароль', style: theme.textTheme.titleSmall),
                         ),
                         SizedBox(
-                          width: 453,
                           height: 35,
                           child: TextFormField(
                             decoration: InputDecoration(
@@ -152,64 +144,52 @@ class _MyHomePageState extends State<MyHomePage> {
                             Text('Запомнить меня', style: theme.textTheme.titleSmall)
                           ],
                         ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: ElevatedButton(
+                                onPressed: () {},
+                                clipBehavior: Clip.antiAlias,
+                                style: ElevatedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  padding: EdgeInsets.zero,
+                                ),
+                                child: const Text(
+                                  'ВОЙТИ',
+                                  style: TextStyle(fontSize: 16, fontFamily: "Roboto", fontWeight: FontWeight.w600, color: Colors.white),
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 20),
+                            Expanded(
+                              child: ElevatedButton(
+                                onPressed: () {},
+                                clipBehavior: Clip.antiAlias,
+                                style: ElevatedButton.styleFrom(
+                                  primary: const Color(0xFFDADADA),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  padding: EdgeInsets.zero,
+                                ),
+                                child: const Text(
+                                  'ЗАРЕГИСТРИРОВАТЬСЯ',
+                                  style: TextStyle(fontSize: 16, fontFamily: "Roboto", fontWeight: FontWeight.w600, color: Color(0xFF4094D0)),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Text(
+                          'Забыли пароль?',
+                          style: TextStyle(fontSize: 14, fontFamily: "Roboto", fontWeight: FontWeight.w600, color: Color(0xFF4094D0)),
+                        )
                       ],
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: SizedBox(
-                          width: 216,
-                          height: 48,
-                          child: ElevatedButton(
-                            onPressed: () {},
-                            clipBehavior: Clip.antiAlias,
-                            style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              padding: EdgeInsets.zero,
-                            ),
-                            child: const Text(
-                              'ВОЙТИ',
-                              style: TextStyle(fontSize: 16, fontFamily: "Roboto", fontWeight: FontWeight.w600, color: Colors.white),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: SizedBox(
-                          width: 216,
-                          height: 48,
-                          child: ElevatedButton(
-                            onPressed: () {},
-                            clipBehavior: Clip.antiAlias,
-                            style: ElevatedButton.styleFrom(
-                              primary: const Color(0xFFDADADA),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              padding: EdgeInsets.zero,
-                            ),
-                            child: const Text(
-                              'ЗАРЕГИСТРИРОВАТЬСЯ',
-                              style: TextStyle(fontSize: 16, fontFamily: "Roboto", fontWeight: FontWeight.w600, color: Color(0xFF4094D0)),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const Align(
-                    alignment: Alignment.topLeft,
-                    child: Text(
-                      'Забыли пароль?',
-                      style: TextStyle(fontSize: 14, fontFamily: "Roboto", fontWeight: FontWeight.w600, color: Color(0xFF4094D0)),
-                    ),
-                  )
                 ],
               ),
             ),
