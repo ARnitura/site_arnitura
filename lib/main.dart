@@ -1,4 +1,3 @@
-import 'package:arnitura_site/test.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -48,20 +47,44 @@ class _MyHomePageState extends State<MyHomePage> {
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        leading: Image.asset('assets/logo_app_bar.png'),
-        title: Text(widget.title),
+        flexibleSpace: Image(
+          image: AssetImage('assets/appbar/appbar_backgraund.png'),
+          fit: BoxFit.cover,
+        ),
+        centerTitle: true,
+        actions: <Widget>[
+          Padding(
+            padding: EdgeInsets.only(right: 20.0),
+            child: GestureDetector(
+              onTap: () {},
+              child: Text(
+                'Войти',
+                textAlign: TextAlign.center,
+                style:
+                TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                  fontFamily: 'Roboto',
+                ),
+              ),
+            ),
+          ),
+        ],
+        leading: Image.asset('assets/appbar/logo_app_bar.png'),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Container(
-              width: 565,
-              height: 523,
+              // margin: EdgeInsets.symmetric(
+              //     horizontal: MediaQuery.of(context).size.width * 0.3),
               decoration: BoxDecoration(
                   border: Border.all(color: Color(0xFF4094D0)),
                   borderRadius: BorderRadius.circular(17)),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0, 30, 0, 30),
@@ -87,49 +110,54 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ],
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 20, 0, 10),
-                        child:
-                            Text('Пароль', style: theme.textTheme.titleSmall),
-                      ),
-                      SizedBox(
-                        width: 453,
-                        height: 35,
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            suffixIcon: GestureDetector(
-                              onTap: () {
+                  Container(
+                    margin: EdgeInsets.only(
+                        left: MediaQuery.of(context).size.width * 0.4 / 2),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 20, 0, 10),
+                          child:
+                              Text('Пароль', style: theme.textTheme.titleSmall),
+                        ),
+                        SizedBox(
+                          width: 453,
+                          height: 35,
+                          child: TextFormField(
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              suffixIcon: GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    _obscureText1 = !_obscureText1;
+                                  });
+                                },
+                                child: Icon(_obscureText1
+                                    ? Icons.visibility_outlined
+                                    : Icons.visibility_off_outlined),
+                              ),
+                            ),
+                            obscureText: _obscureText1,
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: checkBoxValue,
+                              onChanged: (bool? value) {
+                                // This is where we update the state when the checkbox is tapped
                                 setState(() {
-                                  _obscureText1 = !_obscureText1;
+                                  checkBoxValue = value!;
                                 });
                               },
-                              child: Icon(_obscureText1
-                                  ? Icons.visibility_outlined
-                                  : Icons.visibility_off_outlined),
                             ),
-                          ),
-                          obscureText: _obscureText1,
+                            Text('Запомнить меня',
+                                style: theme.textTheme.titleSmall)
+                          ],
                         ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Checkbox(
-                        value: checkBoxValue,
-                        onChanged: (bool? value) {
-                          // This is where we update the state when the checkbox is tapped
-                          setState(() {
-                            checkBoxValue = value!;
-                          });
-                        },
-                      ),
-                      Text('Запомнить меня', style: theme.textTheme.titleSmall)
-                    ],
+                      ],
+                    ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
