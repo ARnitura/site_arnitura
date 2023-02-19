@@ -14,7 +14,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        textTheme: TextTheme(
+          titleLarge: TextStyle(
+              color: Color(0xFF4094D0),
+              fontFamily: 'Roboto',
+              fontWeight: FontWeight.bold,
+              fontSize: 34),
+          titleSmall: TextStyle(
+              color: Color(0xFF83868B), fontFamily: 'Roboto', fontSize: 16),
+        ),
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -32,9 +40,12 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  bool _obscureText1 = true;
+  bool checkBoxValue = false;
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         leading: Image.asset('assets/logo_app_bar.png'),
@@ -44,20 +55,162 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+            Container(
+              width: 565,
+              height: 523,
+              decoration: BoxDecoration(
+                  border: Border.all(color: Color(0xFF4094D0)),
+                  borderRadius: BorderRadius.circular(17)),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 30, 0, 30),
+                    child:
+                        Text('Авторизация', style: theme.textTheme.titleLarge),
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                        child: Text('ИНН или адрес эл. почты',
+                            style: theme.textTheme.titleSmall),
+                      ),
+                      SizedBox(
+                        width: 453,
+                        height: 35,
+                        child: TextFormField(
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 20, 0, 10),
+                        child:
+                            Text('Пароль', style: theme.textTheme.titleSmall),
+                      ),
+                      SizedBox(
+                        width: 453,
+                        height: 35,
+                        child: TextFormField(
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            suffixIcon: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  _obscureText1 = !_obscureText1;
+                                });
+                              },
+                              child: Icon(_obscureText1
+                                  ? Icons.visibility_outlined
+                                  : Icons.visibility_off_outlined),
+                            ),
+                          ),
+                          obscureText: _obscureText1,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Checkbox(
+                        value: checkBoxValue,
+                        onChanged: (bool? value) {
+                          // This is where we update the state when the checkbox is tapped
+                          setState(() {
+                            checkBoxValue = value!;
+                          });
+                        },
+                      ),
+                      Text('Запомнить меня', style: theme.textTheme.titleSmall)
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: SizedBox(
+                          width: 216,
+                          height: 48,
+                          child: ElevatedButton(
+                            onPressed: () {},
+                            clipBehavior: Clip.antiAlias,
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              padding: EdgeInsets.zero,
+                            ),
+                            child: Text(
+                              'ВОЙТИ',
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontFamily: "Roboto",
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: SizedBox(
+                          width: 216,
+                          height: 48,
+                          child: ElevatedButton(
+                            onPressed: () {},
+                            clipBehavior: Clip.antiAlias,
+                            style: ElevatedButton.styleFrom(
+                              primary: Color(0xFFDADADA),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              padding: EdgeInsets.zero,
+                            ),
+                            child: Text(
+                              'ЗАРЕГИСТРИРОВАТЬСЯ',
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontFamily: "Roboto",
+                                  fontWeight: FontWeight.w600,
+                                  color: Color(0xFF4094D0)),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      'Забыли пароль?',
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontFamily: "Roboto",
+                          fontWeight: FontWeight.w600,
+                          color: Color(0xFF4094D0)),
+                    ),
+                  )
+                ],
+              ),
             ),
-            TextField(),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context).push(MaterialPageRoute(builder: (context) => MyApp2()));
-        },
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     Navigator.of(context).push(MaterialPageRoute(builder: (context) => MyApp2()));
+      //   },
+      //   tooltip: 'Increment',s
+      //   child: const Icon(Icons.add),
+      // ),
     );
   }
 }
