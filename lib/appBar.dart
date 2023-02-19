@@ -1,32 +1,50 @@
+import 'package:arnitura_site/passwordchange.dart';
+import 'package:arnitura_site/passwordreset.dart';
+import 'package:arnitura_site/successpasswordchange.dart';
+import 'package:arnitura_site/successpasswordreset.dart';
 import 'package:flutter/material.dart';
 
 class appBarArnitura extends StatelessWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      flexibleSpace: Image(
+      flexibleSpace: const Image(
         image: AssetImage('assets/appbar/appbar_background.png'),
         fit: BoxFit.cover,
       ),
       centerTitle: true,
       actions: <Widget>[
-        Padding(
-          padding: EdgeInsets.only(right: 20.0),
-          child: GestureDetector(
-            onTap: () {},
-            child: Text(
+        Container(
+          margin: EdgeInsets.only(right: 100),
+          child: TextButton(
+            child: const Text(
               'Войти',
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.white,
+                fontWeight: FontWeight.w200,
                 fontSize: 24,
                 fontFamily: 'Roboto',
               ),
             ),
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => PasswordReset()));
+            },
           ),
         ),
       ],
-      leading: Image.asset('assets/appbar/logo_app_bar.png'),
+      leading: Container(
+        margin: const EdgeInsets.only(left: 100),
+        child: TextButton(
+          style: ButtonStyle(
+              padding: MaterialStateProperty.all(EdgeInsets.zero)),
+          onPressed: () {},
+          child: Image.asset(
+            'assets/appbar/logo_app_bar.png',
+          ),
+        ),
+      ),
+      leadingWidth: 220,
     );
   }
 
