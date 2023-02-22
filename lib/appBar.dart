@@ -1,7 +1,7 @@
-import 'package:arnitura_site/passwordchange.dart';
-import 'package:arnitura_site/passwordreset.dart';
-import 'package:arnitura_site/successpasswordchange.dart';
-import 'package:arnitura_site/successpasswordreset.dart';
+import 'package:arnitura_site/password_change.dart';
+// import 'package:arnitura_site/passwordreset.dart';
+import 'package:arnitura_site/success_password_change.dart';
+import 'package:arnitura_site/success_password_reset.dart';
 import 'package:flutter/material.dart';
 
 class appBarArnitura extends StatelessWidget with PreferredSizeWidget {
@@ -28,7 +28,7 @@ class appBarArnitura extends StatelessWidget with PreferredSizeWidget {
               ),
             ),
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => PasswordReset()));
+              // Navigator.push(context, MaterialPageRoute(builder: (context) => PasswordReset()));
             },
           ),
         ),

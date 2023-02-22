@@ -1,3 +1,4 @@
+import 'package:arnitura_site/password_change.dart';
 import 'package:arnitura_site/theme.dart';
 import 'package:flutter/material.dart';
 import 'appBar.dart';
@@ -9,21 +10,18 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: themeArnitura,
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
+  const MyHomePage({super.key});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -140,7 +138,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 ),
                               ),
                             ),
-                            SizedBox(width: 20),
+                            const SizedBox(width: 20),
                             Expanded(
                               child: ElevatedButton(
                                 onPressed: () {},
@@ -154,6 +152,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 ),
                                 child: const Text(
                                   'ЗАРЕГИСТРИРОВАТЬСЯ',
+                                  maxLines: 1,
                                   style: TextStyle(
                                       fontSize: 16,
                                       fontFamily: "Roboto",
@@ -166,13 +165,17 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(0, 15, 0, 40),
-                          child: Text(
-                            'Забыли пароль?',
-                            style: TextStyle(
-                                fontSize: 14,
-                                fontFamily: "Roboto",
-                                fontWeight: FontWeight.w600,
-                                color: Color(0xFF4094D0)),
+                          child: TextButton(
+                            onPressed: () {
+                              Navigator.of(context).push(MaterialPageRoute(builder: (context) => PasswordChange()));
+                            },
+                            child: const Text('Забыли пароль?',
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  fontFamily: "Roboto",
+                                  fontWeight: FontWeight.w600,
+                                  color: Color(0xFF4094D0)),
+                            ),
                           ),
                         )
                       ],
