@@ -15,67 +15,69 @@ class appBarArnitura extends StatelessWidget with PreferredSizeWidget {
         fit: BoxFit.cover,
       ),
       centerTitle: true,
-      actions: prefs.getBool('') == true ? <Widget>[
-        Container(
-          margin: EdgeInsets.only(right: 100),
-          child: TextButton(
-            child: const Text(
-              'Войти',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w200,
-                fontSize: 24,
-                fontFamily: 'Roboto',
+      actions: prefs.getBool('isAuth') == false || prefs.getBool('isAuth') == null
+          ? <Widget>[
+              Container(
+                margin: EdgeInsets.only(right: 100),
+                child: TextButton(
+                  child: const Text(
+                    'Войти',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w200,
+                      fontSize: 24,
+                      fontFamily: 'Roboto',
+                    ),
+                  ),
+                  onPressed: () {
+                    // Navigator.push(context, MaterialPageRoute(builder: (context) => PasswordReset()));
+                  },
+                ),
               ),
-            ),
-            onPressed: () {
-              // Navigator.push(context, MaterialPageRoute(builder: (context) => PasswordReset()));
-            },
-          ),
-        ),
-      ] : <Widget>[Container(
-        margin: EdgeInsets.only(right: 30),
-        child: TextButton(
-          child: const Text(
-            'Главная страница',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.w100,
-              fontSize: 24,
-              fontFamily: 'Roboto',
-            ),
-          ),
-          onPressed: () {
-            // Navigator.push(context, MaterialPageRoute(builder: (context) => PasswordReset()));
-          },
-        ),
-      ),
-        Container(
-          margin: EdgeInsets.only(right: 100),
-          child: TextButton(
-            child: const Text(
-              'Выйти',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w100,
-                fontSize: 24,
-                fontFamily: 'Roboto',
+            ]
+          : <Widget>[
+              Container(
+                margin: EdgeInsets.only(right: 20),
+                child: TextButton(
+                  child: const Text(
+                    'Главная страница',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w100,
+                      fontSize: 24,
+                      fontFamily: 'Roboto',
+                    ),
+                  ),
+                  onPressed: () {
+                    // Navigator.push(context, MaterialPageRoute(builder: (context) => PasswordReset()));
+                  },
+                ),
               ),
-            ),
-            onPressed: () {
-              // Navigator.push(context, MaterialPageRoute(builder: (context) => PasswordReset()));
-            },
-          ),
-        )
-      ],
+              Container(
+                margin: EdgeInsets.only(right: 100),
+                child: TextButton(
+                  child: const Text(
+                    'Выйти',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w100,
+                      fontSize: 24,
+                      fontFamily: 'Roboto',
+                    ),
+                  ),
+                  onPressed: () {
+                    // Navigator.push(context, MaterialPageRoute(builder: (context) => PasswordReset()));
+                  },
+                ),
+              )
+            ],
       leading: Container(
         margin: const EdgeInsets.only(left: 100),
         child: TextButton(
-          style: ButtonStyle(
-              padding: MaterialStateProperty.all(EdgeInsets.zero)),
+          style: ButtonStyle(padding: MaterialStateProperty.all(EdgeInsets.zero)),
           onPressed: () {},
           child: Image.asset(
             'assets/appbar/logo_app_bar.png',
@@ -87,4 +89,5 @@ class appBarArnitura extends StatelessWidget with PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);}
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+}

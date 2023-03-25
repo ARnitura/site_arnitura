@@ -43,6 +43,9 @@ class _SignPageState extends State<SignPage> {
   @override
   void initState() {
     super.initState();
+    if (prefs.getBool('isRemember') == false) {
+      prefs.setBool('isAuth', false);
+    }
     initPrefs();
   }
 
