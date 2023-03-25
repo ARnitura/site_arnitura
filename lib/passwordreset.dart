@@ -3,31 +3,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'appBar.dart';
 
-class PasswordReset extends StatelessWidget {
-  const PasswordReset({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: themeArnitura,
-      home: PasswordResetPage(
-        title: '',
-      ),
-    );
-  }
-}
-
 class PasswordResetPage extends StatefulWidget {
-  const PasswordResetPage({super.key, required this.title});
-
-  final String title;
+  const PasswordResetPage({super.key});
 
   @override
   State<PasswordResetPage> createState() => _PasswordResetPageState();
 }
 
 class _PasswordResetPageState extends State<PasswordResetPage> {
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,19 +27,15 @@ class _PasswordResetPageState extends State<PasswordResetPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Container(
-              margin: EdgeInsets.symmetric(
-                  horizontal: MediaQuery.of(context).size.width * 0.35),
-              decoration: BoxDecoration(
-                  border: Border.all(color: const Color(0xFF4094D0)),
-                  borderRadius: BorderRadius.circular(17)),
+              margin: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.35),
+              decoration: BoxDecoration(border: Border.all(color: const Color(0xFF4094D0)), borderRadius: BorderRadius.circular(17)),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0, 40, 0, 20),
-                    child:
-                        Text('Сброс пароля', style: theme.textTheme.titleLarge),
+                    child: Text('Сброс пароля', style: theme.textTheme.titleLarge),
                   ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(90, 0, 90, 0),
@@ -60,7 +44,7 @@ class _PasswordResetPageState extends State<PasswordResetPage> {
                       children: [
                         Center(
                           child: Container(
-                            margin: EdgeInsets.fromLTRB(0, 10, 0, 80),
+                            margin: const EdgeInsets.fromLTRB(0, 10, 0, 80),
                             child: Text(
                               'Для сброса пароля введите адрес электронной почты.',
                               textAlign: TextAlign.center,
@@ -69,11 +53,12 @@ class _PasswordResetPageState extends State<PasswordResetPage> {
                           ),
                         ),
                         Container(
-                          margin: EdgeInsets.fromLTRB(0, 0, 0, 80),
+                          margin: const EdgeInsets.fromLTRB(0, 0, 0, 80),
                           child: SizedBox(
-                            height: 35,
+                            height: 40,
                             child: TextFormField(
                               decoration: const InputDecoration(
+                                hintStyle: TextStyle(fontSize: 14),
                                 hintText: 'Адрес электронной почты',
                                 border: OutlineInputBorder(),
                               ),
@@ -81,7 +66,7 @@ class _PasswordResetPageState extends State<PasswordResetPage> {
                           ),
                         ),
                         Container(
-                          margin: EdgeInsets.fromLTRB(0, 0, 0, 60),
+                          margin: const EdgeInsets.fromLTRB(0, 0, 0, 60),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -96,7 +81,7 @@ class _PasswordResetPageState extends State<PasswordResetPage> {
                                     padding: EdgeInsets.zero,
                                   ),
                                   child: Container(
-                                    margin: EdgeInsets.fromLTRB(0, 20, 0, 20),
+                                    margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                                     child: Text(
                                       'СБРОСИТЬ ПАРОЛЬ',
                                       style: theme.textTheme.labelLarge,
