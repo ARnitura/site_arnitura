@@ -1,7 +1,3 @@
-import 'package:arnitura_site/password_change.dart';
-import 'package:arnitura_site/passwordreset.dart';
-import 'package:arnitura_site/success_password_change.dart';
-import 'package:arnitura_site/success_password_reset.dart';
 import 'package:flutter/material.dart';
 
 import 'globals.dart';
