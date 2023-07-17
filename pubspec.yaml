@@ -11,7 +11,13 @@ environment:
 dependencies:
   http: ^0.13.5
   shared_preferences: ^2.0.18
+  dropdown_button2: ^2.1.0
+  file_picker: ^5.2.11
+  sentry: ^7.5.2
+  lottie: ^2.3.2
   expansion_widget: ^0.0.3
+  dotted_border: ^2.0.0+3
+  http_parser: ^4.0.2
   flutter:
     sdk: flutter
 
@@ -46,6 +52,7 @@ flutter:
   assets:
     - assets/appbar/
     - assets/icons/
+    - assets/animation/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

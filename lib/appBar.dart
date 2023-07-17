@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'globals.dart';
 
-class appBarArnitura extends StatelessWidget with PreferredSizeWidget {
+class appBarArnitura extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      automaticallyImplyLeading: true,
       flexibleSpace: const Image(
         image: AssetImage('assets/appbar/appbar_background.png'),
         fit: BoxFit.cover,
@@ -70,8 +71,8 @@ class appBarArnitura extends StatelessWidget with PreferredSizeWidget {
                 ),
               )
             ],
-      leading: Container(
-        margin: const EdgeInsets.only(left: 100),
+      title: SizedBox(
+        width: 150,
         child: TextButton(
           style: ButtonStyle(padding: MaterialStateProperty.all(EdgeInsets.zero)),
           onPressed: () {},
@@ -80,7 +81,15 @@ class appBarArnitura extends StatelessWidget with PreferredSizeWidget {
           ),
         ),
       ),
-      leadingWidth: 220,
+      leading: prefs.getBool('isAuth') == true ? GestureDetector(
+        onTap: () {
+          Scaffold.of(context).openDrawer();
+        },
+          child: Container(
+        child: Image.asset('assets/appbar/menu.png'),
+        margin: EdgeInsets.only(left: 50),
+      )) : Container(),
+      leadingWidth: 85,
     );
   }
 

@@ -1,17 +1,29 @@
+import 'package:arnitura_site/account.dart';
+import 'package:arnitura_site/feedback.dart';
 import 'package:arnitura_site/globals.dart';
+import 'package:arnitura_site/materials.dart';
 import 'package:arnitura_site/passwordreset.dart';
+import 'package:arnitura_site/products.dart';
 import 'package:arnitura_site/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sentry/sentry.dart';
 import 'appBar.dart';
-import 'package:http/http.dart';
 
-import 'package:arnitura_site/dashboard.dart';
-
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  prefs = await SharedPreferences.getInstance();
-  runApp(const MyApp());
+Future<void> main() async {
+  await Sentry.init(
+    (options) {
+      options.dsn = 'https://1a165fde8bec4010a76c8c30087149c9@o402412.ingest.sentry.io/4505188576722944';
+      options.tracesSampleRate = 1.0;
+    },
+    appRunner: () async {
+      prefs = await SharedPreferences.getInstance();
+      // if (kDebugMode) {
+      //   url_server = 'http://192.168.0.7:5003/';
+      // }
+      return runApp(const MyApp());
+    },
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -19,10 +31,50 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    initPrefs().then((value) {
+      if (prefs.getBool('isRemember') == false) {
+        prefs.setBool('isAuth', false);
+      }
+      if (prefs.getInt('dashboardSection') != null) {
+        dashboardSection = prefs.getInt('dashboardSection');
+      }
+    });
     return MaterialApp(
-      title: 'Flutter Demo',
+      builder: (context, widget) {
+        ErrorWidget.builder = (flutterErrorDetails) {
+          debugPrint(flutterErrorDetails.exception.toString());
+          return Column(
+            children: [
+              Text(
+                flutterErrorDetails.exception.toString(),
+                style: const TextStyle(color: Colors.black, fontSize: 50, backgroundColor: Colors.red),
+              ),
+              Text(
+                flutterErrorDetails.stack.toString(),
+                style: const TextStyle(color: Colors.black, fontSize: 40, backgroundColor: Colors.red),
+              ),
+              Text(
+                flutterErrorDetails.silent.toString(),
+                style: const TextStyle(color: Colors.black, fontSize: 40, backgroundColor: Colors.red),
+              ),
+            ],
+          );
+        };
+        return widget!;
+      },
+      title: 'Arnitura',
       theme: themeArnitura,
-      home: prefs.getBool('isRemember') == true ? DashboardPage() : SignPage(),
+      home: prefs.getBool('isRemember') == false || prefs.getBool('isRemember') == null
+          ? const SignPage()
+          : dashboardSection == 0
+              ? const AccountPage()
+              : dashboardSection == 1
+                  ? const ProductsPage()
+                  : dashboardSection == 2
+                      ? const MaterialsPage()
+                      : dashboardSection == 3
+                          ? const FeedbackPage()
+                          : const SignPage(),
     );
   }
 }
@@ -39,30 +91,6 @@ class _SignPageState extends State<SignPage> {
   var passwordController = TextEditingController();
   bool isObscure = true;
   bool isRemember = false;
-
-  @override
-  void initState() {
-    super.initState();
-    if (prefs.getBool('isRemember') == false) {
-      prefs.setBool('isAuth', false);
-    }
-    initPrefs();
-  }
-
-  void initPrefs() async {
-    prefs = await SharedPreferences.getInstance();
-  }
-
-  void sign() async {
-    var response =
-        await post(Uri.parse('${url_server}api/auth_manufacturer'), body: {'login': loginController.text, 'password': passwordController.text});
-    if (response.statusCode == 200) {
-      prefs.setString('manufacturer', response.body);
-      prefs.setBool('isAuth', true);
-      prefs.setBool('isRemember', isRemember);
-      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => DashboardPage()));
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -134,6 +162,7 @@ class _SignPageState extends State<SignPage> {
                                   // This is where we update the state when the checkbox is tapped
                                   setState(() {
                                     isRemember = value!;
+                                    prefs.setBool('isRemember', isRemember);
                                   });
                                 },
                               ),
@@ -147,7 +176,10 @@ class _SignPageState extends State<SignPage> {
                             Expanded(
                               child: ElevatedButton(
                                 onPressed: () {
-                                  sign();
+                                  prefs.setString('login', loginController.text);
+                                  prefs.setString('password', passwordController.text);
+                                  prefs.setBool('isAuth', true);
+                                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const AccountPage()));
                                 },
                                 clipBehavior: Clip.antiAlias,
                                 style: ElevatedButton.styleFrom(
