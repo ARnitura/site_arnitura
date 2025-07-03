@@ -1,6 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-var url_server = 'http://192.168.0.8:8001/';
+var url_server = 'https://api.arnitura.ru/';
 
 late dynamic prefs;
 
